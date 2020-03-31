@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BackendService } from 'src/app/services/backend.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-main-page',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainPageComponent implements OnInit {
 
-  constructor() { }
+  pages$: Observable<any>;
+  constructor(public bs: BackendService) { }
 
   ngOnInit(): void {
+    this.pages$ = this.bs.getAllPages();
   }
 
 }

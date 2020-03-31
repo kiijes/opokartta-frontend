@@ -1,1 +1,6 @@
-<p>main-page works!</p>
+<div fxLayout="column" fxLayoutAlign="start center">
+    <p>main-page works!</p>
+    <div fxLayout="column" fxLayoutAlign="start start" *ngFor="let page of pages$ | async">
+        <p>{{ page.pageName }}</p>
+    </div>
+</div>

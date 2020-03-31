@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginPageComponent implements OnInit {
 
+  error: string;
   constructor(public router: Router, public auth: AuthService) { }
 
   ngOnInit(): void {
@@ -17,7 +18,16 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
+  /**
+   * Submits the login form to auth service.
+   * @param formData Object with the form fields as properties
+   */
   onSubmit(formData: any): void {
+    if (!formData.username || !formData.password) {
+      this.error = 'No username or password';
+      return;
+    }
+    console.log(formData);
     this.auth.login(formData.username, formData.password);
   }
 
