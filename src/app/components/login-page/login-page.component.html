@@ -3,13 +3,14 @@
     <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value)" fxLayout="column" fxLayoutAlign="center start">
         <mat-form-field appearance="outline">
             <mat-label>Username</mat-label>
-            <input ngModel name="username" matInput required>
+            <input type="text" ngModel name="username" matInput required>
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
-            <input ngModel name="password" matInput required>
+            <input [type]="hide ? 'password' : 'text'" ngModel name="password" matInput required>
+            <mat-icon matSuffix (mousedown)="hide = !hide" (mouseup)="hide = !hide">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
         </mat-form-field>
-        <button mat-flat-button class="button">LOGIN</button>
+        <button mat-flat-button class="button login-button">LOGIN</button>
     </form>
     <br>
     <p *ngIf="error" style="color:red; margin-top: 1em;">{{ error }}</p>

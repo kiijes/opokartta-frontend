@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginPageComponent implements OnInit {
 
+  hide = true;
   error: string;
   constructor(public router: Router, public auth: AuthService) { }
 

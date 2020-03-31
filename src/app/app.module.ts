@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -28,6 +29,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatIconModule,
     FlexLayoutModule,
     FormsModule,
     HttpClientModule

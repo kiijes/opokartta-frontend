@@ -18,6 +18,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: white;
 }
 
+.login-button {
+    width: 225px;
+}
+
 .nav-button {
     z-index: 1;
 }
@@ -42,4 +46,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .main-page-wrapper p {
     text-align: left;
+}
+
+.mat-form-field {
+    width: 225px;
 }
