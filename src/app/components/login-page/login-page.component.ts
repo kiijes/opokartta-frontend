@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-login-page',
@@ -11,12 +12,29 @@ export class LoginPageComponent implements OnInit {
 
   hide = true;
   error: string;
-  constructor(public router: Router, public auth: AuthService) { }
+  isHandsetOrTablet = false;
+  constructor(
+    public router: Router,
+    public auth: AuthService,
+    public breakpointObserver: BreakpointObserver
+    ) { }
 
   ngOnInit(): void {
     if (this.auth.isAuthenticated) {
       this.router.navigate(['']);
     }
+
+    this.breakpointObserver
+    .observe([
+      Breakpoints.Handset,
+      Breakpoints.Tablet
+    ]).subscribe((result) => {
+      if (result.matches) {
+        this.isHandsetOrTablet = true;
+      } else {
+        this.isHandsetOrTablet = false;
+      }
+    });
   }
 
   /**
