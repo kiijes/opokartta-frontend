@@ -11,5 +11,16 @@
 </head>
 <body class="mat-typography">
   <app-root></app-root>
+  <script>
+    window.onload = function() {
+      var scrollbarWidth = (window.innerWidth - document.getElementsByClassName('outlet')[0].clientWidth);
+      console.warn(scrollbarWidth);
+      
+      var style = document.createElement('style');
+      style.innerHTML = '.mat-typography .nav-header {' + 'padding-right: ' + (scrollbarWidth / 2) + 'px;' + '}';
+      var ref = document.querySelector('style');
+      ref.parentNode.insertBefore(style, ref);
+    }
+  </script>
 </body>
 </html>

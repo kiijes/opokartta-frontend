@@ -4,7 +4,7 @@ html, body { height: 100%; overflow: hidden; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 #loginForm {
-    margin-top: 40px;
+    margin-top: 1em;
 }
 
 #navbar {
@@ -22,8 +22,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     z-index: 1;
 }
 
-.nav {
-
+.mat-typography p {
+    margin: 0;
 }
 
 .nav-header {
@@ -31,12 +31,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     font-weight: 500;
     position: absolute;
     width: 100%;
-    margin: 0 auto;
     text-align: center;
 }
 
 .outlet {
     padding-top: 1em;
     height: calc(100% - 40px - 1em);
-    overflow: scroll;
+    overflow-y: scroll;
+}
+
+.main-page-wrapper p {
+    text-align: left;
 }

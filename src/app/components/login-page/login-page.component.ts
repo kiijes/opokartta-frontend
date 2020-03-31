@@ -27,7 +27,6 @@ export class LoginPageComponent implements OnInit {
       this.error = 'No username or password';
       return;
     }
-    console.log(formData);
     this.auth.login(formData.username, formData.password);
   }
 
