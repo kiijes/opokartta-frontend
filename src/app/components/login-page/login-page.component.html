@@ -1,1 +1,16 @@
-<p>login-page works!</p>
+<div id="loginForm" fxLayout="column" fxLayoutAlign="center center">
+    <h1>JAMK Opokartta</h1>
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value)" fxLayout="column" fxLayoutAlign="center start">
+        <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input ngModel name="username" matInput>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input ngModel name="password" matInput>
+        </mat-form-field>
+        <br>
+        <button mat-flat-button color="primary">LOGIN</button>
+        </form>
+</div>
