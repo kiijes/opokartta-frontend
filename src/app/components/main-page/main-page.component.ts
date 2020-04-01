@@ -1,19 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BackendService } from 'src/app/services/backend.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.css']
 })
-export class MainPageComponent implements OnInit {
+export class MainPageComponent implements OnInit, OnDestroy {
 
-  pages$: Observable<any>;
-  constructor(public bs: BackendService) { }
+  pages;
+  subscription: Subscription;
+  constructor(private bs: BackendService) { }
 
   ngOnInit(): void {
-    this.pages$ = this.bs.getAllPages();
+    this.subscription = this.bs.getAllPages().subscribe(res => {
+      this.pages = res;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }

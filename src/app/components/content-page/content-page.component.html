@@ -1,5 +1,9 @@
-<div fxLayout="column" fxLayoutAlign="start start" class="main-page-wrapper">
-    <div fxLayout="column" fxLayoutAlign="start start" *ngFor="let page of page$ | async">
+<div fxLayout="column" fxLayoutAlign="start start" class="main-page-wrapper" *ngIf="page">
+    <button mat-icon-button routerLink="/">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="content-title">{{ page.pageName }}</h1>
+    <div fxLayout="column" fxLayoutAlign="start start">
         <div *ngFor="let pageContent of page.pageContent">
             <div class="element">
                 <h2>{{ pageContent.name }}</h2>

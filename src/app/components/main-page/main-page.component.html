@@ -1,5 +1,6 @@
 <div fxLayout="column" fxLayoutAlign="start start" class="main-page-wrapper">
-    <div fxLayout="column" fxLayoutAlign="start start" *ngFor="let page of pages$ | async">
+    <h1>Teemat</h1>
+    <div fxLayout="column" fxLayoutAlign="start start" *ngFor="let page of pages">
         <div class="element">
             <h2>{{ page.pageName }}</h2>
             <p *ngIf="page.subtitle">{{ page.subtitle }}</p>

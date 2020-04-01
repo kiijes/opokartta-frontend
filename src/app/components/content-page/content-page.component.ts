@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { BackendService } from 'src/app/services/backend.service';
@@ -9,17 +9,24 @@ import { switchMap } from 'rxjs/operators';
   templateUrl: './content-page.component.html',
   styleUrls: ['./content-page.component.css']
 })
-export class ContentPageComponent implements OnInit {
+export class ContentPageComponent implements OnInit, OnDestroy {
 
-  page$: Observable<any>;
+  page;
+  subscription: Subscription;
   constructor(
-    public router: Router,
-    public route: ActivatedRoute,
-    public bs: BackendService
+    private router: Router,
+    private route: ActivatedRoute,
+    private bs: BackendService
     ) { }
 
   ngOnInit(): void {
-    this.page$ = this.bs.getPageWithId(this.route.snapshot.params.id);
+    this.subscription = this.bs.getPageWithId(this.route.snapshot.params.id).subscribe(res => {
+      this.page = res[0];
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }

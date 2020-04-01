@@ -13,6 +13,10 @@ export class AppComponent implements OnInit {
     private authServ: AuthService
   ) { }
 
+  /**
+   * Authenticate a token if it exists
+   * in the browser's local storage.
+   */
   ngOnInit(): void {
     if (localStorage.getItem('jwt-token')) {
       this.authServ.authenticate();

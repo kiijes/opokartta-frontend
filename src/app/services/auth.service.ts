@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   private baseUrl = 'http://localhost:3000/api/v1';
-  private authenticated: boolean;
+  private authenticated = new BehaviorSubject<boolean>(false);
   constructor(private http: HttpClient, private router: Router) { }
 
   /**
@@ -33,7 +34,7 @@ export class AuthService {
    */
   logout() {
     localStorage.removeItem('jwt-token');
-    this.authenticated = false;
+    this.authenticated.next(false);
     this.router.navigate(['login']);
   }
 
@@ -41,7 +42,11 @@ export class AuthService {
    * Returns whether the user is authenticated or not.
    */
   get isAuthenticated(): boolean {
-    return this.authenticated;
+    return this.authenticated.value;
+  }
+
+  authenticatedSubject(): Observable<boolean> {
+    return this.authenticated.asObservable();
   }
 
   /**
@@ -56,7 +61,7 @@ export class AuthService {
       })
     };
     this.http.get(this.baseUrl + '/user/auth', httpOptions).subscribe((res: boolean) => {
-      this.authenticated = res;
+      this.authenticated.next(res);
       this.router.navigate(['']);
     });
   }

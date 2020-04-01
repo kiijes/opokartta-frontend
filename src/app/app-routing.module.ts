@@ -7,8 +7,9 @@ import { ContentPageComponent } from './components/content-page/content-page.com
 
 
 const routes: Routes = [
-  { path: '', component: MainPageComponent, canActivate: [AuthGuardService] },
+  { path: '', redirectTo: 'pages', pathMatch: 'full' },
   { path: 'login', component: LoginPageComponent },
+  { path: 'pages', component: MainPageComponent, canActivate: [AuthGuardService] },
   { path: 'page/:id', component: ContentPageComponent, canActivate: [AuthGuardService] }
 ];
 
