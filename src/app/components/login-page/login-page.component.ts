@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.css']
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent implements OnInit, OnDestroy {
 
   hide = true;
   error: string;
   isHandsetOrTablet = false;
+  private subscription: Subscription;
   constructor(
     public router: Router,
     public auth: AuthService,
@@ -24,7 +26,7 @@ export class LoginPageComponent implements OnInit {
       this.router.navigate(['']);
     }
 
-    this.breakpointObserver
+    this.subscription = this.breakpointObserver
     .observe([
       Breakpoints.Handset,
       Breakpoints.Tablet
@@ -35,6 +37,10 @@ export class LoginPageComponent implements OnInit {
         this.isHandsetOrTablet = false;
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   /**

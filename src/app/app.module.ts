@@ -15,13 +15,15 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { LayoutModule } from '@angular/cdk/layout';
+import { ContentPageComponent } from './components/content-page/content-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
     MainPageComponent,
-    NavBarComponent
+    NavBarComponent,
+    ContentPageComponent
   ],
   imports: [
     BrowserModule,

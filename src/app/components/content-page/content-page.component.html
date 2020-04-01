@@ -1,0 +1,13 @@
+<div fxLayout="column" fxLayoutAlign="start start" class="main-page-wrapper">
+    <div fxLayout="column" fxLayoutAlign="start start" *ngFor="let page of page$ | async">
+        <div *ngFor="let pageContent of page.pageContent">
+            <div class="element">
+                <h2>{{ pageContent.name }}</h2>
+                <p *ngIf="pageContent.descriptionTitle">{{ pageContent.descriptionTitle }}</p>
+                <button [routerLink]="['/page/', 'asd']" mat-flat-button>Näytä sisältö</button>
+                <button mat-flat-button>Muokkaa</button>
+                <button mat-flat-button>Poista</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -44,6 +44,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     overflow-y: scroll;
 }
 
+.main-page-wrapper {
+    margin-top: 2em;
+}
+
 .main-page-wrapper p {
     text-align: left;
 }
@@ -51,3 +55,40 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-form-field {
     width: 225px;
 }
+
+.element {
+    background-color: #00588e;
+    color: white;
+    padding: 2em;
+    margin-bottom: 2em;
+}
+
+.element h2 {
+    margin: 0;
+}
+
+.element button {
+    margin-top: 1em;
+    margin-right: 1em;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .element {
+        width: 200px;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .element {
+        width: 350px;
+    }
+}
+
+/* Medium devices (landscape tablets, 800px and up) */
+@media only screen and (min-width: 800px) {
+    .element {
+        width: 500px;
+    }
+} 
