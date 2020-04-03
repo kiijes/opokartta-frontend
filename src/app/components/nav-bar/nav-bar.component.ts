@@ -11,10 +11,10 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   showLogout: boolean;
   subscription: Subscription;
-  constructor(private authServ: AuthService) { }
+  constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.subscription = this.authServ.authenticatedSubject().subscribe(res => {
+    this.subscription = this.auth.authenticatedSubject().subscribe(res => {
       this.showLogout = res;
     });
   }
@@ -24,7 +24,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   }
 
   logout(): void {
-    this.authServ.logout();
+    this.auth.logout();
   }
 
 }

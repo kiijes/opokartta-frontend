@@ -22,10 +22,14 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     ) { }
 
   ngOnInit(): void {
-    if (this.auth.isAuthenticated) {
-      this.router.navigate(['']);
+    // If a token exists in local storage, authenticate it
+    if (this.auth.token) {
+      // If a redirect URL exists, send it, otherwise redirect to main page
+      this.auth.authenticate(this.auth.redirectUrl ? this.auth.redirectUrl : '');
     }
 
+    // Subscribe to a breakpoint observer to set whether
+    // the user device is a handset/tablet or not
     this.subscription = this.breakpointObserver
     .observe([
       Breakpoints.Handset,

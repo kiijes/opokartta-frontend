@@ -8,8 +8,16 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class AuthService {
 
+  // Base url for the backend API
   private baseUrl = 'http://localhost:3000/api/v1';
+
+  // BehaviorSubject that informs subscribers
+  // whether the user is authenticated or not.
   private authenticated = new BehaviorSubject<boolean>(false);
+
+  // URL used for redirection after authentication
+  redirectUrl: string;
+
   constructor(private http: HttpClient, private router: Router) { }
 
   /**
@@ -23,7 +31,8 @@ export class AuthService {
     .subscribe((data: any) => {
       if (data.success) {
         localStorage.setItem('jwt-token', data.token);
-        this.authenticate();
+        this.authenticated.next(true);
+        this.router.navigate(['/pages']);
       }
     });
   }
@@ -45,6 +54,10 @@ export class AuthService {
     return this.authenticated.value;
   }
 
+  /**
+   * Return the authenticated BehaviorSubject
+   * as an observable.
+   */
   authenticatedSubject(): Observable<boolean> {
     return this.authenticated.asObservable();
   }
@@ -53,7 +66,7 @@ export class AuthService {
    * Validate the client's JWT token in the backend
    * to grant access.
    */
-  authenticate(): void {
+  authenticate(url: string): void {
     const token = localStorage.getItem('jwt-token');
     const httpOptions = {
       headers: new HttpHeaders({
@@ -62,10 +75,13 @@ export class AuthService {
     };
     this.http.get(this.baseUrl + '/user/auth', httpOptions).subscribe((res: boolean) => {
       this.authenticated.next(res);
-      this.router.navigate(['']);
-    });
+      this.router.navigate([url]);
+    }, () => false);
   }
 
+  /**
+   * Get the token from local storage.
+   */
   get token(): string {
     const token = localStorage.getItem('jwt-token');
     return token;
