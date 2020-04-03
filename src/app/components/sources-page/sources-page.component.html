@@ -1,0 +1,18 @@
+<div fxLayout="column" fxLayoutAlign="start start" class="main-page-wrapper" *ngIf="pageContent">
+    <button mat-icon-button [routerLink]="['/page', pageId]">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="content-title">{{ pageContent.name }}</h1>
+    <div fxLayout="column" fxLayoutAlign="start start">
+        <div *ngFor="let source of pageContent.supportSources">
+            <div class="element">
+                <h2>{{ source.sourceName }}</h2>
+                <p *ngIf="source.description">{{ source.description }}</p>
+                <p *ngIf="source.link">{{ source.link }}</p>
+                <p *ngIf="source.icon">{{ source.icon }}</p>
+                <button mat-flat-button>Muokkaa</button>
+                <button mat-flat-button>Poista</button>
+            </div>
+        </div>
+    </div>
+</div>

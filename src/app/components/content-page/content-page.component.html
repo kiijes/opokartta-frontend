@@ -8,7 +8,7 @@
             <div class="element">
                 <h2>{{ pageContent.name }}</h2>
                 <p *ngIf="pageContent.descriptionTitle">{{ pageContent.descriptionTitle }}</p>
-                <button [routerLink]="['/page/', 'asd']" mat-flat-button>Näytä sisältö</button>
+                <button [routerLink]="['/page', page._id, 'content', pageContent._id]" mat-flat-button>Näytä sisältö</button>
                 <button mat-flat-button>Muokkaa</button>
                 <button mat-flat-button>Poista</button>
             </div>

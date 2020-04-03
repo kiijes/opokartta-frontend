@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { ContentPageComponent } from './components/content-page/content-page.component';
+import { SourcesPageComponent } from './components/sources-page/sources-page.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ContentPageComponent } from './components/content-page/content-page.com
     LoginPageComponent,
     MainPageComponent,
     NavBarComponent,
-    ContentPageComponent
+    ContentPageComponent,
+    SourcesPageComponent
   ],
   imports: [
     BrowserModule,
