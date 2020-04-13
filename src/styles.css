@@ -45,6 +45,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .main-page-wrapper {
+    position: relative;
     margin-top: 2em;
 }
 
@@ -104,4 +105,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .edit .mat-form-field {
     width: 100%;
+}
+
+.button-add.mat-flat-button {
+    position: absolute;
+    right: 0;
+    margin-bottom: 1em;
 }

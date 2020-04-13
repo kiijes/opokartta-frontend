@@ -14,10 +14,18 @@ export class BackendService {
   private supportSourceSubject: BehaviorSubject<any> = new BehaviorSubject<any>([]);
   constructor(private http: HttpClient) { }
 
+  /**
+   * Return a BehaviorSubject that sends info
+   * about pages when they are updated.
+   */
   getPages(): BehaviorSubject<any> {
     return this.pageSubject;
   }
 
+  /**
+   * Get pages and send them via the
+   * BehaviorSubject returned by getPages().
+   */
   updatePages() {
     this.http.get(this.baseUrl + '/pages-nosub')
       .subscribe((res) => {
@@ -25,10 +33,19 @@ export class BackendService {
       });
   }
 
+  /**
+   * Return a BehaviorSubject that sends info
+   * about page contents when they are updated.
+   */
   getPageContent(): BehaviorSubject<any> {
     return this.pageContentSubject;
   }
 
+  /**
+   * Get page contents and send them via
+   * the BehaviorSubject returned by getPageContent().
+   * @param id ID of Page document
+   */
   updatePageContent(id: string) {
     this.http.get(this.baseUrl + '/pages/' + id)
       .subscribe((res) => {
@@ -36,10 +53,20 @@ export class BackendService {
       });
   }
 
+  /**
+   * Return a BehaviorSubject that sends info
+   * about support sources when they are updated.
+   */
   getSupportSources(): BehaviorSubject<any> {
     return this.supportSourceSubject;
   }
 
+  /**
+   * Get support sources and send them via
+   * the BehaviorSubject returned by getSupportSources().
+   * @param id ID of Page document
+   * @param pid ID of PageContent document
+   */
   updateSupportSources(id: string, pid: string) {
     this.http.get(this.baseUrl + '/pages/' + id + '/page-contents/' + pid)
       .subscribe((res) => {
@@ -47,6 +74,12 @@ export class BackendService {
       });
   }
 
+  /**
+   * Send the data from edit page form
+   * to the backend.
+   * @param id ID of Page document
+   * @param body Body containing updated info
+   */
   editPage(id: string, body: object) {
     return this.http.put(this.baseUrl + '/pages/' + id, body);
   }

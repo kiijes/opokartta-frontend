@@ -1,15 +1,39 @@
 <div fxLayout="column" fxLayoutAlign="start start" class="main-page-wrapper">
     <h1>Teemat</h1>
+    <button (click)="toggleCreate()" mat-flat-button class="button button-add">LUO UUSI</button>
+
+    <!-- Create element card -->
+    <div class="element" *ngIf="createIsToggled">
+        <form class="edit" #createForm="ngForm" (ngSubmit)="onCreateSubmit(createForm.value)" fxLayout="column" fxLayoutAlign="center start">
+            <mat-form-field appearance="fill">
+                <mat-label>Theme name</mat-label>
+                <input type="text" ngModel name="pageName" matInput required>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Theme subtitle</mat-label>
+                <textarea
+                    ngModel
+                    name="subtitle"
+                    matInput></textarea>
+            </mat-form-field>
+            <button mat-flat-button>TALLENNA</button>
+        </form>
+        <button mat-flat-button (click)="toggleCreate()">PERUUTA</button>
+    </div>
+    
     <div fxLayout="column" fxLayoutAlign="start start" *ngFor="let page of pages">
-        <div class="element" *ngIf="elementToEdit !== page._id">
+        <!-- Normal element card -->
+        <div class="element" *ngIf="!createIsToggled && elementToEdit !== page._id">
             <h2>{{ page.pageName }}</h2>
             <p *ngIf="page.subtitle">{{ page.subtitle }}</p>
             <button [routerLink]="['/page/', page._id]" mat-flat-button>NÄYTÄ SISÄLTÖ</button>
-            <button mat-flat-button (click)="setEdit(page._id)">MUOKKAA</button>
+            <button mat-flat-button (click)="toggleEdit(page._id)">MUOKKAA</button>
             <button mat-flat-button>POISTA</button>
         </div>
-        <div class="element" *ngIf="editIsToggled && elementToEdit == page._id">
-            <form class="edit" #editForm="ngForm" (ngSubmit)="onSubmit(editForm.value)" fxLayout="column" fxLayoutAlign="center start">
+
+        <!-- Edit element card -->
+        <div class="element" *ngIf="!createIsToggled && editIsToggled && elementToEdit == page._id">
+            <form class="edit" #editForm="ngForm" (ngSubmit)="onEditSubmit(editForm.value)" fxLayout="column" fxLayoutAlign="center start">
                 <mat-form-field appearance="fill">
                     <mat-label>Theme name</mat-label>
                     <input type="text" [ngModel]="page.pageName" name="pageName" matInput required>
@@ -23,7 +47,7 @@
                 </mat-form-field>
                 <button mat-flat-button>TALLENNA</button>
             </form>
-            <button mat-flat-button (click)="setEdit()">PERUUTA</button>
+            <button mat-flat-button (click)="toggleEdit()">PERUUTA</button>
         </div>
     </div>
 </div>

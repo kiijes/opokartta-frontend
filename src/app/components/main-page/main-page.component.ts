@@ -15,6 +15,8 @@ export class MainPageComponent implements OnInit, OnDestroy {
   editIsToggled = false;
   elementToEdit: string;
 
+  createIsToggled = false;
+
   constructor(private bs: BackendService) { }
 
   ngOnInit(): void {
@@ -28,7 +30,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  setEdit(id?: string) {
+  toggleEdit(id?: string) {
     if (!id) {
       this.editIsToggled = false;
       this.elementToEdit = null;
@@ -38,12 +40,20 @@ export class MainPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  onSubmit(value: any): void {
+  toggleCreate(): void {
+    this.createIsToggled = !this.createIsToggled;
+  }
+
+  onEditSubmit(value: any): void {
     this.bs.editPage(this.elementToEdit, value).subscribe(res => {
       console.log(res);
       this.bs.updatePages();
-      this.setEdit();
+      this.toggleEdit();
     });
+  }
+
+  onCreateSubmit(value: any): void {
+    console.log(value);
   }
 
 }
