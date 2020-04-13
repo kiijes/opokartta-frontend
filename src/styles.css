@@ -73,10 +73,32 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     margin-right: 1em;
 }
 
+.button-add.mat-flat-button {
+    position: absolute;
+    right: 0;
+}
+
+.content-title {
+    position: absolute;
+    left: 2em;
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     .element {
         width: 200px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .button-add.mat-flat-button {
+        position: relative;
+        margin-bottom: 1em;
+    }
+    
+    .content-title {
+        position: relative;
+        left: 0;
     }
 }
 
@@ -105,16 +127,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .edit .mat-form-field {
     width: 100%;
-}
-
-.button-add.mat-flat-button {
-    position: absolute;
-    right: 0;
-}
-
-.content-title {
-    position: absolute;
-    left: 2em;
 }
 
 .back-button.mat-icon-button {
