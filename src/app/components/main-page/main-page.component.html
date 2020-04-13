@@ -1,12 +1,29 @@
 <div fxLayout="column" fxLayoutAlign="start start" class="main-page-wrapper">
     <h1>Teemat</h1>
     <div fxLayout="column" fxLayoutAlign="start start" *ngFor="let page of pages">
-        <div class="element">
+        <div class="element" *ngIf="elementToEdit !== page._id">
             <h2>{{ page.pageName }}</h2>
             <p *ngIf="page.subtitle">{{ page.subtitle }}</p>
-            <button [routerLink]="['/page/', page._id]" mat-flat-button>Näytä sisältö</button>
-            <button mat-flat-button>Muokkaa</button>
-            <button mat-flat-button>Poista</button>
+            <button [routerLink]="['/page/', page._id]" mat-flat-button>NÄYTÄ SISÄLTÖ</button>
+            <button mat-flat-button (click)="setEdit(page._id)">MUOKKAA</button>
+            <button mat-flat-button>POISTA</button>
+        </div>
+        <div class="element" *ngIf="editIsToggled && elementToEdit == page._id">
+            <form class="edit" #editForm="ngForm" (ngSubmit)="onSubmit(editForm.value)" fxLayout="column" fxLayoutAlign="center start">
+                <mat-form-field appearance="fill">
+                    <mat-label>Theme name</mat-label>
+                    <input type="text" [ngModel]="page.pageName" name="pageName" matInput required>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Theme subtitle</mat-label>
+                    <textarea
+                        [ngModel]="page.subtitle ? page.subtitle : ''"
+                        name="subtitle"
+                        matInput></textarea>
+                </mat-form-field>
+                <button mat-flat-button>TALLENNA</button>
+            </form>
+            <button mat-flat-button (click)="setEdit()">PERUUTA</button>
         </div>
     </div>
 </div>

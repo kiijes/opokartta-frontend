@@ -96,3 +96,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .back-button {
     margin: 0;
 }
+
+.edit .mat-form-field-appearance-fill .mat-form-field-flex {
+    background: white;
+    color: black;
+}
+
+.edit .mat-form-field {
+    width: 100%;
+}
