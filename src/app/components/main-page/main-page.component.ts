@@ -18,9 +18,10 @@ export class MainPageComponent implements OnInit, OnDestroy {
   constructor(private bs: BackendService) { }
 
   ngOnInit(): void {
-    this.subscription = this.bs.getAllPages().subscribe(res => {
+    this.subscription = this.bs.getPages().subscribe(res => {
       this.pages = res;
     });
+    this.bs.updatePages();
   }
 
   ngOnDestroy(): void {
@@ -38,8 +39,11 @@ export class MainPageComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(value: any): void {
-    console.log(value);
-    this.setEdit();
+    this.bs.editPage(this.elementToEdit, value).subscribe(res => {
+      console.log(res);
+      this.bs.updatePages();
+      this.setEdit();
+    });
   }
 
 }

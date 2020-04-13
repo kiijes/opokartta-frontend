@@ -21,11 +21,13 @@ export class SourcesPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.pageId = this.route.snapshot.params.id;
-    this.subscription = this.bs.getPageContentWithId(
+    this.subscription = this.bs.getSupportSources().subscribe(res => {
+      this.pageContent = res;
+    });
+
+    this.bs.updateSupportSources(
       this.route.snapshot.params.id,
-      this.route.snapshot.params.pid).subscribe(res => {
-        this.pageContent = res;
-      });
+      this.route.snapshot.params.pid);
   }
 
   ngOnDestroy(): void {

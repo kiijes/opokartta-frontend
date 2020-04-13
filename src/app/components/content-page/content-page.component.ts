@@ -18,9 +18,11 @@ export class ContentPageComponent implements OnInit, OnDestroy {
     ) { }
 
   ngOnInit(): void {
-    this.subscription = this.bs.getPageWithId(this.route.snapshot.params.id).subscribe(res => {
-      this.page = res[0];
+    this.subscription = this.bs.getPageContent().subscribe(res => {
+      this.page = res;
     });
+
+    this.bs.updatePageContent(this.route.snapshot.params.id);
   }
 
   ngOnDestroy(): void {
