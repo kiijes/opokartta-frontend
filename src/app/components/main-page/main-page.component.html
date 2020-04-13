@@ -20,7 +20,7 @@
         </form>
         <button mat-flat-button (click)="toggleCreate()">PERUUTA</button>
     </div>
-    
+
     <div fxLayout="column" fxLayoutAlign="start start" *ngFor="let page of pages">
         <!-- Normal element card -->
         <div class="element" *ngIf="!createIsToggled && elementToEdit !== page._id">
@@ -28,7 +28,7 @@
             <p *ngIf="page.subtitle">{{ page.subtitle }}</p>
             <button [routerLink]="['/page/', page._id]" mat-flat-button>NÄYTÄ SISÄLTÖ</button>
             <button mat-flat-button (click)="toggleEdit(page._id)">MUOKKAA</button>
-            <button mat-flat-button>POISTA</button>
+            <button mat-flat-button (click)="deletePage(page._id)">POISTA</button>
         </div>
 
         <!-- Edit element card -->

@@ -53,7 +53,18 @@ export class MainPageComponent implements OnInit, OnDestroy {
   }
 
   onCreateSubmit(value: any): void {
-    console.log(value);
+    this.bs.addPage(value);
+    this.toggleCreate();
+  }
+
+  deletePage(id: string): void {
+    const confirmDelete = confirm('Do you really want to delete this document?');
+    if (!confirmDelete) {
+      return;
+    } else {
+      this.bs.deletePage(id);
+    }
+
   }
 
 }

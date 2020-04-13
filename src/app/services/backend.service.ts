@@ -83,4 +83,26 @@ export class BackendService {
   editPage(id: string, body: object) {
     return this.http.put(this.baseUrl + '/pages/' + id, body);
   }
+
+  /**
+   * Create a new Page document.
+   * @param body New page object
+   */
+  addPage(body: object): void {
+    this.http.post(this.baseUrl + '/pages', body)
+      .subscribe(() => {
+        this.updatePages();
+      });
+  }
+
+  /**
+   * Delete a Page document.
+   * @param id ID of Page document
+   */
+  deletePage(id: string): void {
+    this.http.delete(this.baseUrl + '/pages/' + id)
+      .subscribe(() => {
+        this.updatePages();
+      });
+  }
 }
