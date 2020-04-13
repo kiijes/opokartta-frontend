@@ -110,5 +110,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .button-add.mat-flat-button {
     position: absolute;
     right: 0;
-    margin-bottom: 1em;
+}
+
+.content-title {
+    position: absolute;
+    left: 2em;
+}
+
+.back-button.mat-icon-button {
+    margin-bottom: 8px;
 }

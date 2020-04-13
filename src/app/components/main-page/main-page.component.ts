@@ -45,8 +45,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   }
 
   onEditSubmit(value: any): void {
-    this.bs.editPage(this.elementToEdit, value).subscribe(res => {
-      console.log(res);
+    this.bs.editPage(this.elementToEdit, value).subscribe(() => {
       this.bs.updatePages();
       this.toggleEdit();
     });
@@ -64,7 +63,6 @@ export class MainPageComponent implements OnInit, OnDestroy {
     } else {
       this.bs.deletePage(id);
     }
-
   }
 
 }

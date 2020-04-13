@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -80,7 +80,7 @@ export class BackendService {
    * @param id ID of Page document
    * @param body Body containing updated info
    */
-  editPage(id: string, body: object) {
+  editPage(id: string, body: object): Observable<any> {
     return this.http.put(this.baseUrl + '/pages/' + id, body);
   }
 
@@ -103,6 +103,42 @@ export class BackendService {
     this.http.delete(this.baseUrl + '/pages/' + id)
       .subscribe(() => {
         this.updatePages();
+      });
+  }
+
+  /**
+   * Send the data from the
+   * edit page content form
+   * to the backend.
+   * @param id ID of Page document
+   * @param pid ID of PageContent document
+   * @param body Body containing updated info
+   */
+  editPageContent(id: string, pid: string, body: object): Observable<any> {
+    return this.http.put(this.baseUrl + '/pages/' + id + '/page-contents/' + pid, body);
+  }
+
+  /**
+   * Create a new PageContent document
+   * @param id ID of Page document
+   * @param body New PageContent document
+   */
+  addPageContent(id: string, body: object): void {
+    this.http.post(this.baseUrl + '/pages/' + id + '/page-contents', body)
+      .subscribe(() => {
+        this.updatePageContent(id);
+      });
+  }
+
+  /**
+   * Delete a PageContent document.
+   * @param id ID of Page document
+   * @param pid ID of PageContent document
+   */
+  deletePageContent(id: string, pid: string): void {
+    this.http.delete(this.baseUrl + '/pages/' + id + '/page-contents/' + pid)
+      .subscribe(() => {
+        this.updatePageContent(id);
       });
   }
 }

@@ -1,5 +1,5 @@
 <div fxLayout="column" fxLayoutAlign="start start" class="main-page-wrapper" *ngIf="pageContent">
-    <button mat-icon-button [routerLink]="['/page', pageId]">
+    <button class="back-button" mat-icon-button [routerLink]="['/page', pageId]">
         <mat-icon>arrow_back</mat-icon>
     </button>
     <h1 class="content-title">{{ pageContent.name }}</h1>

@@ -27,7 +27,7 @@ export class AuthService {
    * @param pass Password
    */
   login(user: string, pass: string) {
-    this.http.post<any>(this.baseUrl + '/user/signin', { username: user, password: pass })
+    this.http.post<any>(this.baseUrl + '/user/signin', { username: user, password: pass }, { headers: { skip: 'true' } })
     .subscribe((data: any) => {
       if (data.success) {
         localStorage.setItem('jwt-token', data.token);

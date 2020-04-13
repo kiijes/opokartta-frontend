@@ -14,7 +14,10 @@ export class TokenInterceptor implements HttpInterceptor {
   constructor(private auth: AuthService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('request intercepted');
+    if (request.headers.get('skip')) {
+      return next.handle(request);
+    }
+
     request = request.clone({
       setHeaders: {
         'x-access-token': this.auth.token

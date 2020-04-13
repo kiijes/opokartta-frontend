@@ -12,6 +12,11 @@ export class ContentPageComponent implements OnInit, OnDestroy {
 
   page;
   subscription: Subscription;
+
+  createIsToggled = false;
+
+  editIsToggled = false;
+  elementToEdit: string;
   constructor(
     private route: ActivatedRoute,
     private bs: BackendService
@@ -27,6 +32,41 @@ export class ContentPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  toggleEdit(id?: string) {
+    if (!id) {
+      this.editIsToggled = false;
+      this.elementToEdit = null;
+    } else {
+      this.editIsToggled = true;
+      this.elementToEdit = id;
+    }
+  }
+
+  onEditSubmit(id: string, pid: string, value: any): void {
+    this.bs.editPageContent(id, pid, value).subscribe(() => {
+      this.bs.updatePageContent(this.route.snapshot.params.id);
+      this.toggleEdit();
+    });
+  }
+
+  onCreateSubmit(value: any): void {
+    this.bs.addPageContent(this.route.snapshot.params.id, value);
+    this.toggleCreate();
+  }
+
+  toggleCreate(): void {
+    this.createIsToggled = !this.createIsToggled;
+  }
+
+  deletePageContent(pid: string): void {
+    const confirmDelete = confirm('Do you really want to delete this document?');
+    if (!confirmDelete) {
+      return;
+    } else {
+      this.bs.deletePageContent(this.route.snapshot.params.id, pid);
+    }
   }
 
 }
