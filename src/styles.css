@@ -149,3 +149,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .checkbox-item:first-child {
     margin-left: 0;
 }
+
+.add-button.mat-flat-button {
+    margin-top: 0;
+}

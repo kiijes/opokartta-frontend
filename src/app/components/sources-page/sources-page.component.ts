@@ -83,10 +83,13 @@ export class SourcesPageComponent implements OnInit, OnDestroy {
   }
 
   setEditForm(source: any): void {
+    // Set name and description
     this.editForm.patchValue({
       sourceName: source.sourceName,
       description: source.description
     });
+
+    // Set links
     for (let i = 0; i < source.link.length; i++) {
       if (i === 0) {
         this.editFormLinks.setControl(0, this.fb.control(source.link[i]));
@@ -94,6 +97,20 @@ export class SourcesPageComponent implements OnInit, OnDestroy {
         this.addEditLink(source.link[i]);
       }
     }
+
+    // Toggle checkboxes
+    Object.keys(this.editForm.value.icon).forEach(item => {
+      for (const icon of source.icon) {
+        if (item === icon) {
+          this.editForm.patchValue({
+            icon: {
+              [item]: true
+            }
+          });
+          break;
+        }
+      }
+    });
   }
 
   clearEditForm(): void {
