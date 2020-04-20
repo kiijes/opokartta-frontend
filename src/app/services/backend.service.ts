@@ -141,4 +141,35 @@ export class BackendService {
         this.updatePageContent(id);
       });
   }
+
+  editSupportSource(): void {
+    // TODO
+  }
+
+  /**
+   * Create a new SupportSource document
+   * @param id ID of Page document
+   * @param pid ID of PageContent document
+   * @param body New SupportSource document
+   */
+  addSupportSource(id: string, pid: string, body: object): void {
+    this.http.post(this.baseUrl + '/pages/' + id + '/page-contents/' + pid, body)
+      .subscribe(() => {
+        this.updateSupportSources(id, pid);
+      });
+  }
+
+  /**
+   * Delete a SupportSource document.
+   * @param id ID of Page document
+   * @param pid ID of PageContent document
+   * @param sid ID of SupportSource document
+   */
+  deleteSupportSource(id: string, pid: string, sid: string): void {
+    this.http.delete(this.baseUrl + '/pages/' + id
+    + '/page-contents/' + pid + '/support-sources/' + sid)
+      .subscribe(() => {
+        this.updateSupportSources(id, pid);
+      });
+  }
 }

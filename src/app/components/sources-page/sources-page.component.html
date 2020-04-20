@@ -7,7 +7,7 @@
 
     <!-- Create element card -->
     <div class="element" *ngIf="createIsToggled">
-        <form class="edit" [formGroup]="createForm" (ngSubmit)="onCreateSubmit()" fxLayout="column" fxLayoutAlign="center start">
+        <form class="edit" [formGroup]="createForm" (ngSubmit)="onCreateSubmit(pageContent._id)" fxLayout="column" fxLayoutAlign="center start">
             <mat-form-field appearance="fill">
                 <mat-label>Source name</mat-label>
                 <input type="text" formControlName="sourceName" matInput>
@@ -60,7 +60,7 @@
                 <p *ngIf="source.link">{{ source.link }}</p>
                 <p *ngIf="source.icon">{{ source.icon }}</p>
                 <button mat-flat-button>Muokkaa</button>
-                <button mat-flat-button>Poista</button>
+                <button mat-flat-button (click)="deleteSupportSource(pageContent._id, source._id)">Poista</button>
             </div>
         </div>
     </div>

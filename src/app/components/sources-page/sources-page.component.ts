@@ -60,7 +60,7 @@ export class SourcesPageComponent implements OnInit, OnDestroy {
     this.links.push(this.fb.control(''));
   }
 
-  onCreateSubmit(): void {
+  onCreateSubmit(pid: string): void {
     // Create a support source document
     const supportSource = {
       sourceName: this.createForm.value.sourceName,
@@ -75,7 +75,7 @@ export class SourcesPageComponent implements OnInit, OnDestroy {
         supportSource.icon.push(item);
       }
     });
-    console.log(supportSource);
+    this.bs.addSupportSource(this.pageId, pid, supportSource);
     this.toggleCreate();
   }
 
@@ -89,6 +89,15 @@ export class SourcesPageComponent implements OnInit, OnDestroy {
 
   removeLink(): void {
     this.links.removeAt(this.links.length - 1);
+  }
+
+  deleteSupportSource(pid: string, sid: string): void {
+    const confirmDelete = confirm('Do you really want to delete this document?');
+    if (!confirmDelete) {
+      return;
+    } else {
+      this.bs.deleteSupportSource(this.pageId, pid, sid);
+    }
   }
 
 }
