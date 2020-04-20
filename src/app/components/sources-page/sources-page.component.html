@@ -10,7 +10,7 @@
         <form class="edit" [formGroup]="createForm" (ngSubmit)="onCreateSubmit(pageContent._id)" fxLayout="column" fxLayoutAlign="center start">
             <mat-form-field appearance="fill">
                 <mat-label>Source name</mat-label>
-                <input type="text" formControlName="sourceName" matInput>
+                <input type="text" formControlName="sourceName" matInput required>
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Source description</mat-label>
@@ -67,7 +67,7 @@
                 <form class="edit" [formGroup]="editForm" (ngSubmit)="onEditSubmit()" fxLayout="column" fxLayoutAlign="center start">
                     <mat-form-field appearance="fill">
                         <mat-label>Source name</mat-label>
-                        <input type="text" formControlName="sourceName" matInput>
+                        <input type="text" formControlName="sourceName" matInput required>
                     </mat-form-field>
                     <mat-form-field appearance="fill">
                         <mat-label>Source description</mat-label>
