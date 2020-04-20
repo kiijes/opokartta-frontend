@@ -28,7 +28,7 @@ export class SourcesPageComponent implements OnInit, OnDestroy {
         sourceName: ['', Validators.required],
         description: [''],
         links: this.fb.array([
-          this.fb.control([''])
+          this.fb.control('')
         ]),
         icon: this.fb.group({
           jamk: this.fb.control(false),
@@ -57,11 +57,25 @@ export class SourcesPageComponent implements OnInit, OnDestroy {
     this.createIsToggled = !this.createIsToggled;
     this.createForm.reset();
     this.links.clear();
-    this.links.push(this.fb.control(['']));
+    this.links.push(this.fb.control(''));
   }
 
   onCreateSubmit(): void {
-    console.log(this.createForm.value);
+    // Create a support source document
+    const supportSource = {
+      sourceName: this.createForm.value.sourceName,
+      description: !this.createForm.value.description ? null : this.createForm.value.description,
+      icon: [],
+      link: this.createForm.value.links.length === 1 && this.createForm.value.links[0] === '' ? [] : this.createForm.value.links
+    };
+    // Go through keys to see which icons were toggled,
+    // then add the toggled ones to the array
+    Object.keys(this.createForm.value.icon).forEach((item) => {
+      if (this.createForm.value.icon[item] === true) {
+        supportSource.icon.push(item);
+      }
+    });
+    console.log(supportSource);
     this.toggleCreate();
   }
 
