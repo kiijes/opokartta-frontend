@@ -19,17 +19,17 @@
                     matInput
                 ></textarea>
             </mat-form-field>
-            <div class="mat-ff-wrap" formArrayName="links" *ngFor="let link of links.controls; let i = index">
+            <div class="mat-ff-wrap" formArrayName="links" *ngFor="let link of createFormLinks.controls; let i = index">
                 <mat-form-field appearance="fill">
                     <mat-label>Link #{{i+1}}</mat-label>
                     <input type="text" [formControlName]="i" matInput>
+                    <button mat-flat-button type="button" (click)="removeCreateLink(i)">-</button>
                 </mat-form-field>
             </div>
             <div fxLayout="column">
                 <p>Add or remove a link</p>
                 <div fxLayout="row">
-                    <button mat-flat-button type="button" (click)="addLink()">+</button>
-                    <button mat-flat-button type="button" (click)="removeLink()">-</button>
+                    <button mat-flat-button type="button" (click)="addCreateLink()">+</button>
                 </div>
             </div>
             <div class="checkbox-group" formGroupName="icon" fxLayout="row">
@@ -54,13 +54,59 @@
     <div fxLayout="column" fxLayoutAlign="start start">
         <div *ngFor="let source of pageContent.supportSources">
             <!-- Normal element card -->
-            <div class="element">
+            <div class="element" *ngIf="!createIsToggled && elementToEdit !== source._id">
                 <h2>{{ source.sourceName }}</h2>
                 <p *ngIf="source.description">{{ source.description }}</p>
                 <p *ngIf="source.link">{{ source.link }}</p>
                 <p *ngIf="source.icon">{{ source.icon }}</p>
-                <button mat-flat-button>Muokkaa</button>
+                <button mat-flat-button (click)="toggleEdit(source)">Muokkaa</button>
                 <button mat-flat-button (click)="deleteSupportSource(pageContent._id, source._id)">Poista</button>
+            </div>
+
+            <!-- Edit element card -->
+            <div class="element" *ngIf="!createIsToggled && editIsToggled && elementToEdit == source._id">
+                <form class="edit" [formGroup]="editForm" (ngSubmit)="onEditSubmit()" fxLayout="column" fxLayoutAlign="center start">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Source name</mat-label>
+                        <input type="text" formControlName="sourceName" matInput>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Source description</mat-label>
+                        <textarea
+                            formControlName="description"
+                            matInput
+                        ></textarea>
+                    </mat-form-field>
+                    <div class="mat-ff-wrap" formArrayName="links" *ngFor="let link of editFormLinks.controls; let i = index">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Link #{{i+1}}</mat-label>
+                            <input type="text" [formControlName]="i" matInput>
+                            <button mat-flat-button type="button" (click)="removeEditLink(i)">-</button>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="column">
+                        <p>Add or remove a link</p>
+                        <div fxLayout="row">
+                            <button mat-flat-button type="button" (click)="addEditLink()">+</button>
+                        </div>
+                    </div>
+                    <div class="checkbox-group" formGroupName="icon" fxLayout="row">
+                        <div class="checkbox-item">
+                            <p>JAMK</p>
+                            <input type="checkbox" formControlName="jamk">
+                        </div>
+                        <div class="checkbox-item">
+                            <p>JKL</p>
+                            <input type="checkbox" formControlName="jkl">
+                        </div>
+                        <div class="checkbox-item">
+                            <p>WEB</p>
+                            <input type="checkbox" formControlName="web">
+                        </div>
+                    </div>
+                    <button mat-flat-button>TALLENNA</button>
+                </form>
+                <button mat-flat-button (click)="toggleEdit()">PERUUTA</button>
             </div>
         </div>
     </div>

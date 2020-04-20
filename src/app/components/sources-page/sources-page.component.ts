@@ -17,25 +17,19 @@ export class SourcesPageComponent implements OnInit, OnDestroy {
 
   createIsToggled = false;
 
+  editIsToggled = false;
+  elementToEdit: string = null;
+
   createForm: FormGroup;
+  editForm: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
     private bs: BackendService,
     private fb: FormBuilder
     ) {
-      this.createForm = this.fb.group({
-        sourceName: ['', Validators.required],
-        description: [''],
-        links: this.fb.array([
-          this.fb.control('')
-        ]),
-        icon: this.fb.group({
-          jamk: this.fb.control(false),
-          jkl: this.fb.control(false),
-          web: this.fb.control(false)
-        })
-      });
+      this.createForm = this.createFormGroup();
+      this.editForm = this.createFormGroup();
     }
 
   ngOnInit(): void {
@@ -49,6 +43,21 @@ export class SourcesPageComponent implements OnInit, OnDestroy {
       this.route.snapshot.params.pid);
   }
 
+  createFormGroup(): FormGroup {
+    return this.fb.group({
+      sourceName: ['', Validators.required],
+      description: [''],
+      links: this.fb.array([
+        this.fb.control('')
+      ]),
+      icon: this.fb.group({
+        jamk: this.fb.control(false),
+        jkl: this.fb.control(false),
+        web: this.fb.control(false)
+      })
+    });
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
@@ -56,8 +65,39 @@ export class SourcesPageComponent implements OnInit, OnDestroy {
   toggleCreate(): void {
     this.createIsToggled = !this.createIsToggled;
     this.createForm.reset();
-    this.links.clear();
-    this.links.push(this.fb.control(''));
+    this.createFormLinks.clear();
+    this.createFormLinks.push(this.fb.control(''));
+  }
+
+  toggleEdit(source?: any): void {
+    if (source) {
+      this.setEditForm(source);
+    }
+    if (this.elementToEdit === null) {
+      this.elementToEdit = source._id;
+    } else {
+      this.elementToEdit = null;
+      this.clearEditForm();
+    }
+    this.editIsToggled = !this.editIsToggled;
+  }
+
+  setEditForm(source: any): void {
+    this.editForm.patchValue({
+      sourceName: source.sourceName,
+      description: source.description
+    });
+    for (let i = 0; i < source.link.length; i++) {
+      if (i === 0) {
+        this.editFormLinks.setControl(0, this.fb.control(source.link[i]));
+      } else {
+        this.addEditLink(source.link[i]);
+      }
+    }
+  }
+
+  clearEditForm(): void {
+    this.editForm = this.createFormGroup();
   }
 
   onCreateSubmit(pid: string): void {
@@ -79,16 +119,36 @@ export class SourcesPageComponent implements OnInit, OnDestroy {
     this.toggleCreate();
   }
 
-  get links() {
+  onEditSubmit(): void {
+
+  }
+
+  get createFormLinks() {
     return this.createForm.get('links') as FormArray;
   }
 
-  addLink(): void {
-    this.links.push(this.fb.control(['']));
+  get editFormLinks() {
+    return this.editForm.get('links') as FormArray;
   }
 
-  removeLink(): void {
-    this.links.removeAt(this.links.length - 1);
+  addCreateLink(): void {
+    this.createFormLinks.push(this.fb.control(''));
+  }
+
+  addEditLink(link?: string): void {
+    if (link) {
+      this.editFormLinks.push(this.fb.control(link));
+    } else {
+      this.editFormLinks.push(this.fb.control(''));
+    }
+  }
+
+  removeCreateLink(i: number): void {
+    this.createFormLinks.removeAt(i);
+  }
+
+  removeEditLink(i: number): void {
+    this.editFormLinks.removeAt(i);
   }
 
   deleteSupportSource(pid: string, sid: string): void {
