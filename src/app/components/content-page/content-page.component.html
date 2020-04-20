@@ -26,8 +26,8 @@
     </div>
 
     <div fxLayout="column" fxLayoutAlign="start start">
-        <!-- Normal element card -->
         <div *ngFor="let pageContent of page.pageContent">
+            <!-- Normal element card -->
             <div class="element" *ngIf="!createIsToggled && elementToEdit !== pageContent._id">
                 <h2>{{ pageContent.name }}</h2>
                 <p *ngIf="pageContent.descriptionTitle">{{ pageContent.descriptionTitle }}</p>

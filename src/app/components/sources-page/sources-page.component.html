@@ -3,8 +3,57 @@
         <mat-icon>arrow_back</mat-icon>
     </button>
     <h1 class="content-title">{{ pageContent.name }}</h1>
+    <button (click)="toggleCreate()" mat-flat-button class="button button-add">LUO UUSI</button>
+
+    <!-- Create element card -->
+    <div class="element" *ngIf="createIsToggled">
+        <form class="edit" [formGroup]="createForm" (ngSubmit)="onCreateSubmit()" fxLayout="column" fxLayoutAlign="center start">
+            <mat-form-field appearance="fill">
+                <mat-label>Source name</mat-label>
+                <input type="text" formControlName="sourceName" matInput>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Source description</mat-label>
+                <textarea
+                    formControlName="description"
+                    matInput
+                ></textarea>
+            </mat-form-field>
+            <div class="mat-ff-wrap" formArrayName="links" *ngFor="let link of links.controls; let i = index">
+                <mat-form-field appearance="fill">
+                    <mat-label>Link #{{i+1}}</mat-label>
+                    <input type="text" [formControlName]="i" matInput>
+                </mat-form-field>
+            </div>
+            <div fxLayout="column">
+                <p>Add or remove a link</p>
+                <div fxLayout="row">
+                    <button mat-flat-button type="button" (click)="addLink()">+</button>
+                    <button mat-flat-button type="button" (click)="removeLink()">-</button>
+                </div>
+            </div>
+            <div class="checkbox-group" formGroupName="icon" fxLayout="row">
+                <div class="checkbox-item">
+                    <p>JAMK</p>
+                    <input type="checkbox" formControlName="jamk">
+                </div>
+                <div class="checkbox-item">
+                    <p>JKL</p>
+                    <input type="checkbox" formControlName="jkl">
+                </div>
+                <div class="checkbox-item">
+                    <p>WEB</p>
+                    <input type="checkbox" formControlName="web">
+                </div>
+            </div>
+            <button mat-flat-button>TALLENNA</button>
+        </form>
+        <button mat-flat-button (click)="toggleCreate()">PERUUTA</button>
+    </div>
+
     <div fxLayout="column" fxLayoutAlign="start start">
         <div *ngFor="let source of pageContent.supportSources">
+            <!-- Normal element card -->
             <div class="element">
                 <h2>{{ source.sourceName }}</h2>
                 <p *ngIf="source.description">{{ source.description }}</p>

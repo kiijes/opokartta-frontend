@@ -129,6 +129,22 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     width: 100%;
 }
 
+.mat-ff-wrap {
+    width: 100%;
+}
+
 .back-button.mat-icon-button {
     margin-bottom: 8px;
+}
+
+.checkbox-group {
+    margin-top: 1em;
+}
+
+.checkbox-item {
+    margin-left: 1em;
+}
+
+.checkbox-item:first-child {
+    margin-left: 0;
 }
