@@ -47,6 +47,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .main-page-wrapper {
     position: relative;
     margin-top: 2em;
+    min-width: 256px;
 }
 
 .main-page-wrapper p {
