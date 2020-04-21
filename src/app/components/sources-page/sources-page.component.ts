@@ -43,17 +43,21 @@ export class SourcesPageComponent implements OnInit, OnDestroy {
       this.route.snapshot.params.pid);
   }
 
+  /**
+   * Create a FormGroup for a SupportSource document.
+   */
   createFormGroup(): FormGroup {
     return this.fb.group({
       sourceName: ['', Validators.required],
       description: [''],
+      phone: [''],
       links: this.fb.array([
-        this.fb.control('')
+        ['']
       ]),
       icon: this.fb.group({
-        jamk: this.fb.control(false),
-        jkl: this.fb.control(false),
-        web: this.fb.control(false)
+        jamk: [false],
+        jkl: [false],
+        web: [false]
       })
     });
   }
@@ -83,10 +87,11 @@ export class SourcesPageComponent implements OnInit, OnDestroy {
   }
 
   setEditForm(source: any): void {
-    // Set name and description
+    // Set name, description, and phone
     this.editForm.patchValue({
       sourceName: source.sourceName,
-      description: source.description
+      description: source.description,
+      phone: source.phone
     });
 
     // Set links
@@ -122,6 +127,7 @@ export class SourcesPageComponent implements OnInit, OnDestroy {
     const supportSource = {
       sourceName: this.createForm.value.sourceName,
       description: !this.createForm.value.description ? null : this.createForm.value.description,
+      phone: !this.createForm.value.phone ? null : this.createForm.value.phone,
       icon: [],
       link: this.createForm.value.links.length === 1 && this.createForm.value.links[0] === '' ? [] : this.createForm.value.links
     };
@@ -140,6 +146,7 @@ export class SourcesPageComponent implements OnInit, OnDestroy {
     const supportSource = {
       sourceName: this.editForm.value.sourceName,
       description: !this.editForm.value.description ? null : this.editForm.value.description,
+      phone: !this.editForm.value.phone ? null : this.editForm.value.phone,
       icon: [],
       link: this.editForm.value.links.length === 1 && this.editForm.value.links[0] === '' ? [] : this.editForm.value.links
     };

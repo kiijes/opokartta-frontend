@@ -19,6 +19,10 @@
                     matInput
                 ></textarea>
             </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Source phone number</mat-label>
+                <input type="text" formControlName="phone" matInput>
+            </mat-form-field>
             <div class="mat-ff-wrap" formArrayName="links" *ngFor="let link of createFormLinks.controls; let i = index">
                 <mat-form-field appearance="fill">
                     <mat-label>Link #{{i+1}}</mat-label>
@@ -56,6 +60,7 @@
             <div class="element" *ngIf="!createIsToggled && elementToEdit !== source._id">
                 <h2>{{ source.sourceName }}</h2>
                 <p *ngIf="source.description">{{ source.description }}</p>
+                <p *ngIf="source.phone">{{ source.phone }}</p>
                 <p *ngIf="source.link">{{ source.link }}</p>
                 <p *ngIf="source.icon">{{ source.icon }}</p>
                 <button mat-flat-button (click)="toggleEdit(source)">MUOKKAA</button>
@@ -75,6 +80,10 @@
                             formControlName="description"
                             matInput
                         ></textarea>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Source phone number</mat-label>
+                        <input type="text" formControlName="phone" matInput>
                     </mat-form-field>
                     <div class="mat-ff-wrap" formArrayName="links" *ngFor="let link of editFormLinks.controls; let i = index">
                         <mat-form-field appearance="fill">
