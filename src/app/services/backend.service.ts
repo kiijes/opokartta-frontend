@@ -75,13 +75,15 @@ export class BackendService {
   }
 
   /**
-   * Send the data from edit page form
-   * to the backend.
+   * Edit a Page document.
    * @param id ID of Page document
-   * @param body Body containing updated info
+   * @param body Edited Page document
    */
-  editPage(id: string, body: object): Observable<any> {
-    return this.http.put(this.baseUrl + '/pages/' + id, body);
+  editPage(id: string, body: object): void {
+    this.http.put(this.baseUrl + '/pages/' + id, body)
+      .subscribe(() => {
+        this.updatePages();
+      });
   }
 
   /**
@@ -107,19 +109,20 @@ export class BackendService {
   }
 
   /**
-   * Send the data from the
-   * edit page content form
-   * to the backend.
+   * Edit a PageContent document.
    * @param id ID of Page document
    * @param pid ID of PageContent document
-   * @param body Body containing updated info
+   * @param body Edited PageContent document
    */
-  editPageContent(id: string, pid: string, body: object): Observable<any> {
-    return this.http.put(this.baseUrl + '/pages/' + id + '/page-contents/' + pid, body);
+  editPageContent(id: string, pid: string, body: object): void {
+    this.http.put(this.baseUrl + '/pages/' + id + '/page-contents/' + pid, body)
+      .subscribe(() => {
+        this.updatePageContent(id);
+      });
   }
 
   /**
-   * Create a new PageContent document
+   * Create a new PageContent document.
    * @param id ID of Page document
    * @param body New PageContent document
    */
@@ -142,12 +145,25 @@ export class BackendService {
       });
   }
 
-  editSupportSource(): void {
-    // TODO
+  /**
+   * Update a SupportSource document.
+   * @param id ID of Page document
+   * @param pid ID of PageContent document
+   * @param sid ID of SupportSource document
+   * @param body Edited SupportSource document
+   */
+  editSupportSource(id: string, pid: string, sid: string, body: object): void {
+    this.http.put(
+      this.baseUrl + '/pages/'
+      + id + '/page-contents/'
+      + pid + '/support-sources/'
+      + sid, body).subscribe(() => {
+        this.updateSupportSources(id, pid);
+      });
   }
 
   /**
-   * Create a new SupportSource document
+   * Create a new SupportSource document.
    * @param id ID of Page document
    * @param pid ID of PageContent document
    * @param body New SupportSource document

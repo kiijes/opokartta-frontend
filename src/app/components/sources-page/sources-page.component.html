@@ -64,7 +64,7 @@
 
             <!-- Edit element card -->
             <div class="element" *ngIf="!createIsToggled && editIsToggled && elementToEdit == source._id">
-                <form class="edit" [formGroup]="editForm" (ngSubmit)="onEditSubmit()" fxLayout="column" fxLayoutAlign="center start">
+                <form class="edit" [formGroup]="editForm" (ngSubmit)="onEditSubmit(pageContent._id, source._id)" fxLayout="column" fxLayoutAlign="center start">
                     <mat-form-field appearance="fill">
                         <mat-label>Source name</mat-label>
                         <input type="text" formControlName="sourceName" matInput required>

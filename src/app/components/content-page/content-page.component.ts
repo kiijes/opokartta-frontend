@@ -45,10 +45,8 @@ export class ContentPageComponent implements OnInit, OnDestroy {
   }
 
   onEditSubmit(id: string, pid: string, value: any): void {
-    this.bs.editPageContent(id, pid, value).subscribe(() => {
-      this.bs.updatePageContent(this.route.snapshot.params.id);
-      this.toggleEdit();
-    });
+    this.bs.editPageContent(id, pid, value);
+    this.toggleEdit();
   }
 
   onCreateSubmit(value: any): void {

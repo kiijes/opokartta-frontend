@@ -136,8 +136,20 @@ export class SourcesPageComponent implements OnInit, OnDestroy {
     this.toggleCreate();
   }
 
-  onEditSubmit(): void {
-
+  onEditSubmit(pid: string, sid: string): void {
+    const supportSource = {
+      sourceName: this.editForm.value.sourceName,
+      description: !this.editForm.value.description ? null : this.editForm.value.description,
+      icon: [],
+      link: this.editForm.value.links.length === 1 && this.editForm.value.links[0] === '' ? [] : this.editForm.value.links
+    };
+    Object.keys(this.editForm.value.icon).forEach((item) => {
+      if (this.editForm.value.icon[item] === true) {
+        supportSource.icon.push(item);
+      }
+    });
+    this.bs.editSupportSource(this.pageId, pid, sid, supportSource);
+    this.toggleEdit();
   }
 
   get createFormLinks() {

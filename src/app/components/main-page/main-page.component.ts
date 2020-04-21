@@ -45,10 +45,8 @@ export class MainPageComponent implements OnInit, OnDestroy {
   }
 
   onEditSubmit(value: any): void {
-    this.bs.editPage(this.elementToEdit, value).subscribe(() => {
-      this.bs.updatePages();
-      this.toggleEdit();
-    });
+    this.bs.editPage(this.elementToEdit, value);
+    this.toggleEdit();
   }
 
   onCreateSubmit(value: any): void {
