@@ -3,18 +3,18 @@
         <mat-icon>arrow_back</mat-icon>
     </button>
 
-    <h1 class="content-title">{{ page.pageName }}</h1>
+    <h1 class="content-title">{{ page.pageName }}: ongelmat</h1>
     <button (click)="toggleCreate()" mat-flat-button class="button button-add">LUO UUSI</button>
 
     <!-- Create element card -->
     <div class="element" *ngIf="createIsToggled">
         <form class="edit" #createForm="ngForm" (ngSubmit)="onCreateSubmit(createForm.value)" fxLayout="column" fxLayoutAlign="center start">
             <mat-form-field appearance="fill">
-                <mat-label>Problem name</mat-label>
+                <mat-label>Ongelman nimi</mat-label>
                 <input type="text" ngModel name="name" matInput required>
             </mat-form-field>
             <mat-form-field appearance="fill">
-                <mat-label>Problem description</mat-label>
+                <mat-label>Ongelman kuvaus</mat-label>
                 <textarea
                     ngModel
                     name="descriptionTitle"
@@ -40,11 +40,11 @@
             <div class="element" *ngIf="!createIsToggled && editIsToggled && elementToEdit == pageContent._id">
                 <form class="edit" #editForm="ngForm" (ngSubmit)="onEditSubmit(page._id, pageContent._id, editForm.value)" fxLayout="column" fxLayoutAlign="center start">
                     <mat-form-field appearance="fill">
-                        <mat-label>Problem name</mat-label>
+                        <mat-label>Ongelman nimi</mat-label>
                         <input type="text" [ngModel]="pageContent.name" name="name" matInput required>
                     </mat-form-field>
                     <mat-form-field appearance="fill">
-                        <mat-label>Problem description</mat-label>
+                        <mat-label>Ongelman kuvaus</mat-label>
                         <textarea
                             [ngModel]="pageContent.descriptionTitle ? pageContent.descriptionTitle : ''"
                             name="descriptionTitle"

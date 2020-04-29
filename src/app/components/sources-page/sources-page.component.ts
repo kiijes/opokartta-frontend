@@ -155,6 +155,11 @@ export class SourcesPageComponent implements OnInit, OnDestroy {
         supportSource.icon.push(item);
       }
     });
+
+    for (let i = 0; i < supportSource.link.length; i++) {
+      supportSource.link[i] = this.addPrefixIfMissing(supportSource.link[i]);
+    }
+
     this.bs.editSupportSource(this.pageId, pid, sid, supportSource);
     this.toggleEdit();
   }
@@ -185,6 +190,11 @@ export class SourcesPageComponent implements OnInit, OnDestroy {
 
   removeEditLink(i: number): void {
     this.editFormLinks.removeAt(i);
+  }
+
+  addPrefixIfMissing(link: string): string {
+    const regex = new RegExp('^http(s)?:\/\/');
+    return regex.test(link) ? link : 'https://' + link;
   }
 
   deleteSupportSource(pid: string, sid: string): void {

@@ -80,13 +80,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .content-title {
-    position: absolute;
-    left: 2em;
+    /* position: absolute;
+    left: 2em; */
 }
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     .element {
+        width: 200px;
+    }
+
+    .content-title {
         width: 200px;
     }
 }
@@ -108,11 +112,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     .element {
         width: 350px;
     }
+
+    .content-title {
+        width: 350px;
+    }
 }
 
 /* Medium devices (landscape tablets, 800px and up) */
 @media only screen and (min-width: 800px) {
     .element {
+        width: 500px;
+    }
+
+    .content-title {
         width: 500px;
     }
 }
@@ -152,4 +164,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .add-button.mat-flat-button {
     margin-top: 0;
+}
+
+.logo {
+    max-width: 250px;
+}
+
+.support-link {
+    color: white;
+}
+
+.support-link:hover {
+    color: yellow;
 }

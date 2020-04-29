@@ -1,17 +1,17 @@
 <div id="loginForm" fxLayout="column" fxLayoutAlign="center center">
-    <h1>JAMK Opokartta</h1>
+    <img src="../../../assets/images/logo.png" alt="JAMK Logo" class="logo">
     <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value)" fxLayout="column" fxLayoutAlign="center start">
         <mat-form-field appearance="outline">
-            <mat-label>Username</mat-label>
+            <mat-label>Käyttäjätunnus</mat-label>
             <input type="text" ngModel name="username" matInput required>
         </mat-form-field>
         <mat-form-field appearance="outline">
-            <mat-label>Password</mat-label>
+            <mat-label>Salasana</mat-label>
             <input [type]="hide ? 'password' : 'text'" ngModel name="password" matInput required>
             <mat-icon *ngIf="!isHandsetOrTablet" matSuffix (mousedown)="hide = !hide" (mouseup)="hide = !hide">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
             <mat-icon *ngIf="isHandsetOrTablet" matSuffix (click)="hide = !hide">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
         </mat-form-field>
-        <button mat-flat-button class="button login-button">LOGIN</button>
+        <button mat-flat-button class="button login-button">KIRJAUDU SISÄÄN</button>
     </form>
     <br>
     <p *ngIf="error" style="color:red; margin-top: 1em;">{{ error }}</p>

@@ -2,30 +2,30 @@
     <button class="back-button" mat-icon-button [routerLink]="['/page', pageId]">
         <mat-icon>arrow_back</mat-icon>
     </button>
-    <h1 class="content-title">{{ pageContent.name }}</h1>
+    <h1 class="content-title">{{ pageContent.name }}: tukipalvelut</h1>
     <button (click)="toggleCreate()" mat-flat-button class="button button-add">LUO UUSI</button>
 
     <!-- Create element card -->
     <div class="element" *ngIf="createIsToggled">
         <form class="edit" [formGroup]="createForm" (ngSubmit)="onCreateSubmit(pageContent._id)" fxLayout="column" fxLayoutAlign="center start">
             <mat-form-field appearance="fill">
-                <mat-label>Source name</mat-label>
+                <mat-label>Tukipalvelun nimi</mat-label>
                 <input type="text" formControlName="sourceName" matInput required>
             </mat-form-field>
             <mat-form-field appearance="fill">
-                <mat-label>Source description</mat-label>
+                <mat-label>Tukipalvelun kuvaus</mat-label>
                 <textarea
                     formControlName="description"
                     matInput
                 ></textarea>
             </mat-form-field>
             <mat-form-field appearance="fill">
-                <mat-label>Source phone number</mat-label>
+                <mat-label>Tukipalvelun puhelinnumero</mat-label>
                 <input type="text" formControlName="phone" matInput>
             </mat-form-field>
             <div class="mat-ff-wrap" formArrayName="links" *ngFor="let link of createFormLinks.controls; let i = index">
                 <mat-form-field appearance="fill">
-                    <mat-label>Link #{{i+1}}</mat-label>
+                    <mat-label>Linkki #{{i+1}}</mat-label>
                     <textarea [formControlName]="i" matInput></textarea>
                     <button mat-flat-button color="warn" (click)="removeCreateLink(i)">X</button>
                 </mat-form-field>
@@ -61,7 +61,9 @@
                 <h2>{{ source.sourceName }}</h2>
                 <p *ngIf="source.description">{{ source.description }}</p>
                 <p *ngIf="source.phone">{{ source.phone }}</p>
-                <p *ngIf="source.link">{{ source.link }}</p>
+                <div *ngFor="let link of source.link">
+                    <a [href]="link" class="support-link">{{ link }}</a>
+                </div>
                 <p *ngIf="source.icon">{{ source.icon }}</p>
                 <button mat-flat-button (click)="toggleEdit(source)">MUOKKAA</button>
                 <button mat-flat-button (click)="deleteSupportSource(pageContent._id, source._id)">POISTA</button>
@@ -71,23 +73,23 @@
             <div class="element" *ngIf="!createIsToggled && editIsToggled && elementToEdit == source._id">
                 <form class="edit" [formGroup]="editForm" (ngSubmit)="onEditSubmit(pageContent._id, source._id)" fxLayout="column" fxLayoutAlign="center start">
                     <mat-form-field appearance="fill">
-                        <mat-label>Source name</mat-label>
+                        <mat-label>Tukipalvelun nimi</mat-label>
                         <input type="text" formControlName="sourceName" matInput required>
                     </mat-form-field>
                     <mat-form-field appearance="fill">
-                        <mat-label>Source description</mat-label>
+                        <mat-label>Tukipalvelun kuvaus</mat-label>
                         <textarea
                             formControlName="description"
                             matInput
                         ></textarea>
                     </mat-form-field>
                     <mat-form-field appearance="fill">
-                        <mat-label>Source phone number</mat-label>
+                        <mat-label>Tukipalvelun puhelinnumero</mat-label>
                         <input type="text" formControlName="phone" matInput>
                     </mat-form-field>
                     <div class="mat-ff-wrap" formArrayName="links" *ngFor="let link of editFormLinks.controls; let i = index">
                         <mat-form-field appearance="fill">
-                            <mat-label>Link #{{i+1}}</mat-label>
+                            <mat-label>Linkki #{{i+1}}</mat-label>
                             <textarea [formControlName]="i" matInput></textarea>
                             <button mat-flat-button color="warn" type="button" (click)="removeEditLink(i)">X</button>
                         </mat-form-field>

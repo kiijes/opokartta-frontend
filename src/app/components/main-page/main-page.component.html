@@ -6,11 +6,11 @@
     <div class="element" *ngIf="createIsToggled">
         <form class="edit" #createForm="ngForm" (ngSubmit)="onCreateSubmit(createForm.value)" fxLayout="column" fxLayoutAlign="center start">
             <mat-form-field appearance="fill">
-                <mat-label>Theme name</mat-label>
+                <mat-label>Teeman nimi</mat-label>
                 <input type="text" ngModel name="pageName" matInput required>
             </mat-form-field>
             <mat-form-field appearance="fill">
-                <mat-label>Theme subtitle</mat-label>
+                <mat-label>Teeman kuvaus</mat-label>
                 <textarea
                     ngModel
                     name="subtitle"
@@ -35,11 +35,11 @@
         <div class="element" *ngIf="!createIsToggled && editIsToggled && elementToEdit == page._id">
             <form class="edit" #editForm="ngForm" (ngSubmit)="onEditSubmit(editForm.value)" fxLayout="column" fxLayoutAlign="center start">
                 <mat-form-field appearance="fill">
-                    <mat-label>Theme name</mat-label>
+                    <mat-label>Teeman nimi</mat-label>
                     <input type="text" [ngModel]="page.pageName" name="pageName" matInput required>
                 </mat-form-field>
                 <mat-form-field appearance="fill">
-                    <mat-label>Theme subtitle</mat-label>
+                    <mat-label>Teeman kuvaus</mat-label>
                     <textarea
                         [ngModel]="page.subtitle ? page.subtitle : ''"
                         name="subtitle"
