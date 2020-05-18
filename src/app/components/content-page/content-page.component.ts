@@ -10,23 +10,29 @@ import { BackendService } from 'src/app/services/backend.service';
 })
 export class ContentPageComponent implements OnInit, OnDestroy {
 
+  // variable for the Page document that is used to display data on the page
   page;
+  // subscription that handles updating the page variable
   subscription: Subscription;
-
+  // toggles the create form
   createIsToggled = false;
-
+  // toggles the edit form
   editIsToggled = false;
+  // identifies the element to edit
   elementToEdit: string;
+
   constructor(
     private route: ActivatedRoute,
     private bs: BackendService
     ) { }
 
   ngOnInit(): void {
+    // Subscribes to the pageContentSubject in BackendService for updates
     this.subscription = this.bs.getPageContent().subscribe(res => {
       this.page = res;
     });
 
+    // Initial update call
     this.bs.updatePageContent(this.route.snapshot.params.id);
   }
 
