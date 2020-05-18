@@ -172,3 +172,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .support-link:hover {
     color: yellow;
 }
+
+.move-button {
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    font-weight: bolder;
+    font-size: 1.5em;
+}
+
+.move-button:hover {
+    cursor: pointer;
+}

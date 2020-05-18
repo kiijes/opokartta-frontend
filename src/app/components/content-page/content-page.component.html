@@ -26,14 +26,20 @@
     </div>
 
     <div fxLayout="column" fxLayoutAlign="start start">
-        <div *ngFor="let pageContent of page.pageContent">
+        <div *ngFor="let pageContent of page.pageContent; let i = index">
             <!-- Normal element card -->
             <div class="element" *ngIf="!createIsToggled && elementToEdit !== pageContent._id">
-                <h2>{{ pageContent.name }}</h2>
-                <p *ngIf="pageContent.descriptionTitle">{{ pageContent.descriptionTitle }}</p>
-                <button [routerLink]="['/page', page._id, 'content', pageContent._id]" mat-flat-button>NÄYTÄ SISÄLTÖ</button>
-                <button mat-flat-button (click)="toggleEdit(pageContent._id)">MUOKKAA</button>
-                <button mat-flat-button (click)="deletePageContent(pageContent._id)">POISTA</button>
+                <div>
+                    <h2>{{ pageContent.name }}</h2>
+                    <p *ngIf="pageContent.descriptionTitle">{{ pageContent.descriptionTitle }}</p>
+                    <button [routerLink]="['/page', page._id, 'content', pageContent._id]" mat-flat-button>NÄYTÄ SISÄLTÖ</button>
+                    <button mat-flat-button (click)="toggleEdit(pageContent._id)">MUOKKAA</button>
+                    <button mat-flat-button (click)="deletePageContent(pageContent._id)">POISTA</button>
+                </div>
+                <div>
+                    <button (click)="moveElement(page._id, pageContent._id, 'up')" *ngIf="i > 0" class="move-button">&uarr;</button>
+                    <button (click)="moveElement(page._id, pageContent._id, 'down')" *ngIf="i < page.pageContent.length-1" class="move-button">&darr;</button>
+                </div>
             </div>
 
             <!-- Edit element card -->

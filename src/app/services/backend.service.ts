@@ -146,6 +146,19 @@ export class BackendService {
   }
 
   /**
+   * Move an element in the PageContent array.
+   * @param id ID of Page document
+   * @param pid ID of PageContent document
+   * @param direction Direction to which element is moved; either up or down
+   */
+  movePageContent(id: string, pid: string, direction: string): void {
+    this.http.put(this.baseUrl + '/pages/' + id + '/page-contents/' + pid + '/move', { move: direction })
+      .subscribe(() => {
+        this.updatePageContent(id);
+      });
+  }
+
+  /**
    * Update a SupportSource document.
    * @param id ID of Page document
    * @param pid ID of PageContent document

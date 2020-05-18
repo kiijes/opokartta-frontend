@@ -67,4 +67,8 @@ export class ContentPageComponent implements OnInit, OnDestroy {
     }
   }
 
+  moveElement(id: string, pid: string, direction: string): void {
+    this.bs.movePageContent(id, pid, direction);
+  }
+
 }
