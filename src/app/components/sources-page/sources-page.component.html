@@ -55,18 +55,24 @@
     </div>
 
     <div fxLayout="column" fxLayoutAlign="start start">
-        <div *ngFor="let source of pageContent.supportSources">
+        <div *ngFor="let source of pageContent.supportSources; let i = index">
             <!-- Normal element card -->
             <div class="element" *ngIf="!createIsToggled && elementToEdit !== source._id">
-                <h2>{{ source.sourceName }}</h2>
-                <p *ngIf="source.description">{{ source.description }}</p>
-                <p *ngIf="source.phone">{{ source.phone }}</p>
-                <div *ngFor="let link of source.link">
-                    <a [href]="link" class="support-link">{{ link }}</a>
+                <div>
+                    <h2>{{ source.sourceName }}</h2>
+                    <p *ngIf="source.description">{{ source.description }}</p>
+                    <p *ngIf="source.phone">{{ source.phone }}</p>
+                    <div *ngFor="let link of source.link">
+                        <a [href]="link" class="support-link">{{ link }}</a>
+                    </div>
+                    <p *ngIf="source.icon">{{ source.icon }}</p>
+                    <button mat-flat-button (click)="toggleEdit(source)">MUOKKAA</button>
+                    <button mat-flat-button (click)="deleteSupportSource(pageContent._id, source._id)">POISTA</button>
                 </div>
-                <p *ngIf="source.icon">{{ source.icon }}</p>
-                <button mat-flat-button (click)="toggleEdit(source)">MUOKKAA</button>
-                <button mat-flat-button (click)="deleteSupportSource(pageContent._id, source._id)">POISTA</button>
+                <div>
+                    <button (click)="moveElement(pageContent._id, source._id, 'up')" *ngIf="i > 0" class="move-button">&uarr;</button>
+                    <button (click)="moveElement(pageContent._id, source._id, 'down')" *ngIf="i < pageContent.supportSources.length-1" class="move-button">&darr;</button>
+                </div>
             </div>
 
             <!-- Edit element card -->

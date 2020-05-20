@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -20,6 +21,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { ContentPageComponent } from './components/content-page/content-page.component';
 import { SourcesPageComponent } from './components/sources-page/sources-page.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     MainPageComponent,
     NavBarComponent,
     ContentPageComponent,
-    SourcesPageComponent
+    SourcesPageComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +41,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+    MatProgressSpinnerModule,
     FlexLayoutModule,
     FormsModule,
     HttpClientModule,

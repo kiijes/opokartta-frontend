@@ -206,4 +206,8 @@ export class SourcesPageComponent implements OnInit, OnDestroy {
     }
   }
 
+  moveElement(pid: string, sid: string, direction: string): void {
+    this.bs.moveSupportSource(this.pageId, pid, sid, direction);
+  }
+
 }

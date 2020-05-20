@@ -201,4 +201,19 @@ export class BackendService {
         this.updateSupportSources(id, pid);
       });
   }
+
+  /**
+   * Move an element in the SupportSource array.
+   * @param id ID of Page document
+   * @param pid ID of PageContent document
+   * @param sid ID of SupportSources document
+   * @param direction Direction to which element is moved; either up or down
+   */
+  moveSupportSource(id: string, pid: string, sid: string, direction: string): void {
+    this.http.put(this.baseUrl + '/pages/' + id
+    + '/page-contents/' + pid + '/support-sources/' + sid
+    + '/move', { move: direction }).subscribe(() => {
+      this.updateSupportSources(id, pid);
+    });
+  }
 }
