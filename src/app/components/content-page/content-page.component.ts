@@ -20,6 +20,8 @@ export class ContentPageComponent implements OnInit, OnDestroy {
   editIsToggled = false;
   // identifies the element to edit
   elementToEdit: string;
+  // boolean whether to show loading screen or not
+  loading = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,6 +32,7 @@ export class ContentPageComponent implements OnInit, OnDestroy {
     // Subscribes to the pageContentSubject in BackendService for updates
     this.subscription = this.bs.getPageContent().subscribe(res => {
       this.page = res;
+      this.loading = false;
     });
 
     // Initial update call
@@ -51,11 +54,13 @@ export class ContentPageComponent implements OnInit, OnDestroy {
   }
 
   onEditSubmit(id: string, pid: string, value: any): void {
+    this.loading = true;
     this.bs.editPageContent(id, pid, value);
     this.toggleEdit();
   }
 
   onCreateSubmit(value: any): void {
+    this.loading = true;
     this.bs.addPageContent(this.route.snapshot.params.id, value);
     this.toggleCreate();
   }
@@ -69,11 +74,13 @@ export class ContentPageComponent implements OnInit, OnDestroy {
     if (!confirmDelete) {
       return;
     } else {
+      this.loading = true;
       this.bs.deletePageContent(this.route.snapshot.params.id, pid);
     }
   }
 
   moveElement(id: string, pid: string, direction: string): void {
+    this.loading = true;
     this.bs.movePageContent(id, pid, direction);
   }
 

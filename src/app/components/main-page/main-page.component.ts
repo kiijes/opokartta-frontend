@@ -17,11 +17,14 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
   createIsToggled = false;
 
+  loading = false;
+
   constructor(private bs: BackendService) { }
 
   ngOnInit(): void {
     this.subscription = this.bs.getPages().subscribe(res => {
       this.pages = res;
+      this.loading = false;
     });
     this.bs.updatePages();
   }
@@ -45,11 +48,13 @@ export class MainPageComponent implements OnInit, OnDestroy {
   }
 
   onEditSubmit(value: any): void {
+    this.loading = true;
     this.bs.editPage(this.elementToEdit, value);
     this.toggleEdit();
   }
 
   onCreateSubmit(value: any): void {
+    this.loading = true;
     this.bs.addPage(value);
     this.toggleCreate();
   }
@@ -59,6 +64,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
     if (!confirmDelete) {
       return;
     } else {
+      this.loading = true;
       this.bs.deletePage(id);
     }
   }

@@ -1,3 +1,5 @@
+<app-loading *ngIf="loading"></app-loading>
+
 <div fxLayout="column" fxLayoutAlign="start start" class="main-page-wrapper" *ngIf="pageContent">
     <button class="back-button" mat-icon-button [routerLink]="['/page', pageId]">
         <mat-icon>arrow_back</mat-icon>

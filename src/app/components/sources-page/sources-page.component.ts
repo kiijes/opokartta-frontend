@@ -23,6 +23,8 @@ export class SourcesPageComponent implements OnInit, OnDestroy {
   createForm: FormGroup;
   editForm: FormGroup;
 
+  loading = false;
+
   constructor(
     private route: ActivatedRoute,
     private bs: BackendService,
@@ -36,6 +38,7 @@ export class SourcesPageComponent implements OnInit, OnDestroy {
     this.pageId = this.route.snapshot.params.id;
     this.subscription = this.bs.getSupportSources().subscribe(res => {
       this.pageContent = res;
+      this.loading = false;
     });
 
     this.bs.updateSupportSources(
@@ -123,6 +126,8 @@ export class SourcesPageComponent implements OnInit, OnDestroy {
   }
 
   onCreateSubmit(pid: string): void {
+    this.loading = true;
+
     // Create a support source document
     const supportSource = {
       sourceName: this.createForm.value.sourceName,
@@ -143,6 +148,8 @@ export class SourcesPageComponent implements OnInit, OnDestroy {
   }
 
   onEditSubmit(pid: string, sid: string): void {
+    this.loading = true;
+
     const supportSource = {
       sourceName: this.editForm.value.sourceName,
       description: !this.editForm.value.description ? null : this.editForm.value.description,
@@ -202,11 +209,13 @@ export class SourcesPageComponent implements OnInit, OnDestroy {
     if (!confirmDelete) {
       return;
     } else {
+      this.loading = true;
       this.bs.deleteSupportSource(this.pageId, pid, sid);
     }
   }
 
   moveElement(pid: string, sid: string, direction: string): void {
+    this.loading = true;
     this.bs.moveSupportSource(this.pageId, pid, sid, direction);
   }
 
