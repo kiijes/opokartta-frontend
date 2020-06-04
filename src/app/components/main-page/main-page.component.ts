@@ -60,7 +60,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   }
 
   deletePage(id: string): void {
-    const confirmDelete = confirm('Do you really want to delete this document?');
+    const confirmDelete = confirm('Haluatko varmasti poistaa tämän dokumentin? Tätä muutosta ei voi peruuttaa.');
     if (!confirmDelete) {
       return;
     } else {

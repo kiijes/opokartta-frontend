@@ -205,7 +205,7 @@ export class SourcesPageComponent implements OnInit, OnDestroy {
   }
 
   deleteSupportSource(pid: string, sid: string): void {
-    const confirmDelete = confirm('Do you really want to delete this document?');
+    const confirmDelete = confirm('Haluatko varmasti poistaa tämän dokumentin? Tätä muutosta ei voi peruuttaa.');
     if (!confirmDelete) {
       return;
     } else {

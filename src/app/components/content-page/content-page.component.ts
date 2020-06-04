@@ -70,7 +70,7 @@ export class ContentPageComponent implements OnInit, OnDestroy {
   }
 
   deletePageContent(pid: string): void {
-    const confirmDelete = confirm('Do you really want to delete this document?');
+    const confirmDelete = confirm('Haluatko varmasti poistaa tämän dokumentin? Tätä muutosta ei voi peruuttaa.');
     if (!confirmDelete) {
       return;
     } else {
