@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from './../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BackendService {
 
-  private baseUrl = 'http://localhost:3000/api/v1';
+  private baseUrl = environment.apiUrl + '/api/v1';
   private pageSubject: BehaviorSubject<any> = new BehaviorSubject<any>([]);
   private pageContentSubject: BehaviorSubject<any> = new BehaviorSubject<any>([]);
   private supportSourceSubject: BehaviorSubject<any> = new BehaviorSubject<any>([]);

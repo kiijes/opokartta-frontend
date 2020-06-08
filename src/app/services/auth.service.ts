@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from './../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class AuthService {
 
   // Base url for the backend API
-  private baseUrl = 'http://localhost:3000/api/v1';
+  private baseUrl = environment.apiUrl + '/api/v1';
 
   // BehaviorSubject that informs subscribers
   // whether the user is authenticated or not.
