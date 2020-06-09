@@ -9,7 +9,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class AuthService {
 
   // Base url for the backend API
-  private baseUrl = 'http://localhost:3000/api/v1';
+  private baseUrl = 'https://tiko.jamk.fi/api/v1';
 
   // BehaviorSubject that informs subscribers
   // whether the user is authenticated or not.

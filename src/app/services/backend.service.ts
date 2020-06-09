@@ -8,7 +8,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class BackendService {
 
-  private baseUrl = 'http://localhost:3000/api/v1';
+  private baseUrl = 'https://tiko.jamk.fi/api/v1';
   private pageSubject: BehaviorSubject<any> = new BehaviorSubject<any>([]);
   private pageContentSubject: BehaviorSubject<any> = new BehaviorSubject<any>([]);
   private supportSourceSubject: BehaviorSubject<any> = new BehaviorSubject<any>([]);
